@@ -72,8 +72,8 @@
     transition-delay: 300ms;
   }
 
-  &.swiper-slide-active,
-  &.swiper-slide-next {
+  .screen.active &.swiper-slide-active,
+  .screen.active &.swiper-slide-next {
     .slider__item-text {
       opacity: 1;
       transform: translateX(0);
