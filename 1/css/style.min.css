@@ -1817,10 +1817,13 @@ img {
       content: "";
       position: absolute;
       bottom: 0;
-      width: 0;
+      width: 100%;
       height: 2px;
       background-color: #ffffff;
-      left: 0; }
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: 100% 0;
+      transition: transform 600ms ease-in-out; }
       @media (min-width: 2000px) {
         .page-header__menu a::after {
           left: -5px;
@@ -1836,15 +1839,15 @@ img {
           right: 0;
           background-color: #5f458c; } }
     .page-header__menu a.active::after {
-      width: 100%; }
+      transform: scaleX(1); }
     .page-header__menu a:hover, .page-header__menu a:focus {
       color: #a67ee5;
       outline: none; }
       .page-header__menu a:hover::after, .page-header__menu a:focus::after {
         opacity: 1;
         background-color: #a67ee5;
-        width: 100%;
-        transition: width 600ms ease-in-out; }
+        transform-origin: 0;
+        transform: scaleX(1); }
 
 .page-header__social {
   margin-left: 4.8rem; }
@@ -2884,14 +2887,14 @@ img {
         margin-top: auto; } }
   .slider__item .slider__item-text {
     opacity: 0;
-    transform: translateX(20px); }
-  .slider__item.swiper-slide-active .slider__item-text, .slider__item.swiper-slide-next .slider__item-text {
-    opacity: 1;
-    transform: translateX(0);
+    transform: translateX(20px);
     transition-property: opacity, transform;
     transition-duration: 500ms;
     transition-timing-function: ease-in-out;
     transition-delay: 300ms; }
+  .slider__item.swiper-slide-active .slider__item-text, .slider__item.swiper-slide-next .slider__item-text {
+    opacity: 1;
+    transform: translateX(0); }
   .slider__item.swiper-slide-next .slider__item-text {
     transition-delay: 500ms; }
 
@@ -3204,10 +3207,7 @@ img {
     pointer-events: auto; }
     .social-block--active .social-block__list li {
       opacity: 1;
-      margin-top: 0;
-      transition-property: opacity, margin-top;
-      transition-duration: 400ms;
-      transition-timing-function: ease-in; }
+      transform: translateY(0); }
       .social-block--active .social-block__list li:nth-child(2) {
         transition-delay: 200ms; }
       .social-block--active .social-block__list li:nth-child(3) {
@@ -3216,7 +3216,10 @@ img {
     flex: none;
     margin-bottom: 0.5rem;
     opacity: 0;
-    margin-top: 1rem; }
+    transform: translateY(2rem);
+    transition-property: opacity, transform;
+    transition-duration: 400ms;
+    transition-timing-function: ease-in; }
     @media (min-width: 2000px) {
       .social-block__list li {
         margin-bottom: 5px; } }
