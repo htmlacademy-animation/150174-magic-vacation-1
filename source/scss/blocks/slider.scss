@@ -62,6 +62,29 @@
       }
     }
   }
+
+  .slider__item-text {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  &.swiper-slide-active,
+  &.swiper-slide-next {
+    .slider__item-text {
+      opacity: 1;
+      transform: translateX(0);
+      transition-property: opacity, transform;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in-out;
+      transition-delay: 300ms;
+    }
+  }
+
+  &.swiper-slide-next {
+    .slider__item-text {
+      transition-delay: 500ms;
+    }
+  }
 }
 
 .slider__item-title {

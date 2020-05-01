@@ -246,10 +246,9 @@
       content: "";
       position: absolute;
       bottom: 0;
-      width: 100%;
+      width: 0;
       height: 2px;
       background-color: $c-light;
-      display: none;
       left: 0;
 
       @media (min-width: $stop-scaling) {
@@ -272,7 +271,7 @@
 
     &.active {
       &::after {
-        display: block;
+        width: 100%;
       }
     }
 
@@ -284,6 +283,8 @@
       &::after {
         opacity: 1;
         background-color: $c-purple;
+        width: 100%;
+        transition: width 600ms ease-in-out;
       }
     }
   }
