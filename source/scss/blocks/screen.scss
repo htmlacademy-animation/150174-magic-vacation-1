@@ -8,9 +8,9 @@
 
   &--hidden {
     position: absolute;
+    width: 100%;
     z-index: -1000;
-    opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
   }
 
   @media (max-width: $tablet) and (orientation: portrait) {
@@ -311,7 +311,7 @@
 }
 
 .screen--prizes {
-  background-color: $c-dark;
+  background-color: transparent;
 }
 
 .screen--game {
