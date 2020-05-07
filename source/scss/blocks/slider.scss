@@ -5,6 +5,7 @@
 
   .swiper-wrapper {
     min-height: 100vh;
+    box-sizing: border-box;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       min-height: calc(var(--vh, 1vh) * 100);
@@ -60,30 +61,6 @@
       @media (max-width: $mobile) and (orientation: landscape) {
         margin-top: auto;
       }
-    }
-  }
-
-  .slider__item-text {
-    opacity: 0;
-    transform: translateX(20px);
-    transition-property: opacity, transform;
-    transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
-    transition-delay: 300ms;
-  }
-
-  .screen.active &.swiper-slide-active,
-  .screen.active &.swiper-slide-next {
-    .slider__item-text {
-      opacity: 1;
-      transform: translateX(0);
-
-    }
-  }
-
-  &.swiper-slide-next {
-    .slider__item-text {
-      transition-delay: 500ms;
     }
   }
 }
