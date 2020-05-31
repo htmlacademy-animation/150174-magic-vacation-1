@@ -73,7 +73,7 @@
   .text-word > span {
     display: inline-block;
     vertical-align: top;
-    transform: translate3d(0, 1em, 0);
+    transform: translate3d(0, 1.3em, 0);
   }
 
   &.#{$active-class} {
