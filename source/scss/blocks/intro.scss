@@ -171,6 +171,10 @@
 
   @include text-animation();
 
+  .text-word {
+    padding: 0 0.04em;
+  }
+
   @media (min-width: $stop-scaling) {
     margin: 0 0 0 -5px;
     font-size: 48px;

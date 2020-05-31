@@ -42,8 +42,9 @@ export default () => {
         .trim()
         .split(` `)
         .filter((letter) => letter !== ``);
-
+      console.log(text);
       const content = text.reduce((fragmentParent, word) => {
+        console.log(word)
         const lettersArr = Array.from(word);
         const wordElement = lettersArr.reduce((fragment, letter, index) => {
           fragment.appendChild(this.createElement(letter, index));
@@ -75,13 +76,9 @@ export default () => {
       this._element.innerHTML = ``;
       this._element.textContent = this._initText;
       this.destroyAnimation();
+      console.log(`reverted`, this._element)
     }
   }
-
-  const TEXT_ANIMATION_LOCATIONS = {
-    rules: `#rules`,
-    intro: `#top`,
-  };
 
   const TEXT_ANIMATION_SCREEN_NAMES = {
     rules: `rules`,
@@ -112,12 +109,12 @@ export default () => {
     return [introTitleManager, introDateManager];
   };
 
-  const managers = [rulesTitleManager, introTitleManager, introDateManager];
-  const revertAnimations = () => {
-    managers.forEach((manager) => manager && manager.revertElement());
-  };
-
   const onScreenChange = (evt) => {
+    const managers = [rulesTitleManager, introTitleManager, introDateManager];
+    const revertAnimations = () => {
+      managers.forEach((manager) => manager && manager.revertElement());
+    };
+
     const {detail} = evt;
     if (detail.screenName === TEXT_ANIMATION_SCREEN_NAMES.rules) {
       runRulesTitleAnimation();
@@ -136,15 +133,4 @@ export default () => {
   };
 
   document.body.addEventListener(`screenChanged`, onScreenChange);
-
-  switch (location.hash) {
-    case TEXT_ANIMATION_LOCATIONS.rules:
-      runRulesTitleAnimation();
-      return;
-
-    case TEXT_ANIMATION_LOCATIONS.intro:
-    default:
-      runIntroAnimation();
-      return;
-  }
 };

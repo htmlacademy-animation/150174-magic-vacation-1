@@ -65,13 +65,14 @@
   .text-word {
     display: inline-block;
     vertical-align: top;
+    line-height: 1.3;
     margin: 0 5px;
     overflow-y: hidden;
   }
 
   .text-word > span {
     display: inline-block;
-    vertical-align: sub;
+    vertical-align: top;
     transform: translate3d(0, 1em, 0);
   }
 
