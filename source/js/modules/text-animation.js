@@ -42,9 +42,7 @@ export default () => {
         .trim()
         .split(` `)
         .filter((letter) => letter !== ``);
-      console.log(text);
       const content = text.reduce((fragmentParent, word) => {
-        console.log(word)
         const lettersArr = Array.from(word);
         const wordElement = lettersArr.reduce((fragment, letter, index) => {
           fragment.appendChild(this.createElement(letter, index));
@@ -76,7 +74,6 @@ export default () => {
       this._element.innerHTML = ``;
       this._element.textContent = this._initText;
       this.destroyAnimation();
-      console.log(`reverted`, this._element)
     }
   }
 
