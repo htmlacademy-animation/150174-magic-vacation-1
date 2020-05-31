@@ -23,13 +23,14 @@ export default () => {
     createElement(letter, index) {
       const span = document.createElement(`span`);
       span.textContent = letter;
-      span.style.transition = `${this._property} ${this._timer}ms ease ${this._timeOffset}ms`;
-
       if ((index + 1) % this._letterBlockLength === 0) {
         this._timeOffset = 0;
       } else {
         this._timeOffset += this._timeStep;
       }
+
+      span.style.transition = `${this._property} ${this._timer}ms ease ${this._timeOffset}ms`;
+
       return span;
     }
 
@@ -41,7 +42,6 @@ export default () => {
         .trim()
         .split(` `)
         .filter((letter) => letter !== ``);
-
       const content = text.reduce((fragmentParent, word) => {
         const lettersArr = Array.from(word);
         const wordElement = lettersArr.reduce((fragment, letter, index) => {
@@ -77,28 +77,57 @@ export default () => {
     }
   }
 
-  let animationRulesTitle;
-  const runRulesTitleAnimation = () => {
-    const screenRules = document.querySelector(`.screen--rules`);
-    animationRulesTitle = new TextAnimationManager({
-      element: screenRules.querySelector(`.rules__title`),
-    });
-    setTimeout(() => {
-      animationRulesTitle.runAnimation();
-    }, 500);
+  const TEXT_ANIMATION_SCREEN_NAMES = {
+    rules: `rules`,
+    intro: `top`,
   };
 
-  if (location.hash === `#rules`) {
-    runRulesTitleAnimation();
-  }
+  const runAnimation = (screenClassName, elementClassName, timeout = 500) => {
+    const screenRules = document.querySelector(`.${screenClassName}`);
+    const animationManager = new TextAnimationManager({
+      element: screenRules.querySelector(`.${elementClassName}`),
+    });
+    setTimeout(() => {
+      animationManager.runAnimation();
+    }, timeout);
+    return animationManager;
+  };
 
-  window.addEventListener(`hashchange`, () => {
-    if (location.hash === `#rules`) {
+  let rulesTitleManager;
+  let introTitleManager;
+  let introDateManager;
+  const runRulesTitleAnimation = () => {
+    rulesTitleManager = runAnimation(`screen--rules`, `rules__title`);
+    return rulesTitleManager;
+  };
+  const runIntroAnimation = () => {
+    introTitleManager = runAnimation(`screen--intro`, `intro__title`);
+    introDateManager = runAnimation(`screen--intro`, `intro__date`, 1000);
+    return [introTitleManager, introDateManager];
+  };
+
+  const onScreenChange = (evt) => {
+    const managers = [rulesTitleManager, introTitleManager, introDateManager];
+    const revertAnimations = () => {
+      managers.forEach((manager) => manager && manager.revertElement());
+    };
+
+    const {detail} = evt;
+    if (detail.screenName === TEXT_ANIMATION_SCREEN_NAMES.rules) {
       runRulesTitleAnimation();
-    } else {
-      if (animationRulesTitle) {
-        animationRulesTitle.revertElement();
+      if (introTitleManager && introDateManager) {
+        introTitleManager.revertElement();
+        introDateManager.revertElement();
       }
+    } else if (detail.screenName === TEXT_ANIMATION_SCREEN_NAMES.intro) {
+      runIntroAnimation();
+      if (rulesTitleManager) {
+        rulesTitleManager.revertElement();
+      }
+    } else {
+      revertAnimations();
     }
-  });
+  };
+
+  document.body.addEventListener(`screenChanged`, onScreenChange);
 };

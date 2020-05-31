@@ -24,7 +24,6 @@
 }
 
 .rules__title {
-  opacity: 0;
   margin: 0 0 5rem;
   text-transform: uppercase;
   font-family: $font-alt;
@@ -33,24 +32,7 @@
   line-height: 1;
   letter-spacing: -0.04em;
 
-  .text-word {
-    display: inline-block;
-    margin: 0 5px;
-    overflow: hidden;
-  }
-
-  .text-word > span {
-    display: inline-block;
-    transform: translate3d(0, 1em, 0);
-  }
-
-  &.active {
-    opacity: 1;
-
-    .text-word > span {
-      transform: translate3d(0, 0, 0);
-    }
-  }
+  @include text-animation();
 
   @media (min-width: $stop-scaling) {
     margin-bottom: 50px;

@@ -58,3 +58,29 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin text-animation($active-class: 'active') {
+  opacity: 0;
+
+  .text-word {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.3;
+    margin: 0 5px;
+    overflow-y: hidden;
+  }
+
+  .text-word > span {
+    display: inline-block;
+    vertical-align: top;
+    transform: translate3d(0, 1.3em, 0);
+  }
+
+  &.#{$active-class} {
+    opacity: 1;
+
+    .text-word > span {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
